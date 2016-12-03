@@ -1,0 +1,21 @@
+﻿{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules",
+    "node_modules/rxjs/add/operator/**",
+    "libs",
+    "rxjs",
+    "typings/index.d.ts",
+    "src/**"
+  ]
+}
