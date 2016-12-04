@@ -15,8 +15,8 @@ export class ContactService {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });
 
-        return this._http.post(this.routePrefix + "sendmail", { mail }, options)
-            .map(res => this.extractData(res))
+        return this._http.post(this.routePrefix + "sendmail", mail, options)
+            .map(res => res.json())
             .catch(err => this.handleError(err));
     };
 

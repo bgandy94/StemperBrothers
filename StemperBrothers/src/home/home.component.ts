@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     }
 
     private name: string;
-    private number: string;
+    private emailAddress: string;
     private question: string;
     private mail: Email = new Email();
     private returnMsg: string;
@@ -35,13 +35,19 @@ export class HomeComponent implements OnInit {
         //alert(" Name: " + this.name + "\r\n Number: " + this.number + "\r\n Question: " + this.question);
         //this.clear();
         this.mail.name = this.name;
-        this.mail.email = this.number;
+        this.mail.emailAddress = this.emailAddress;
         this.mail.question = this.question;
         this._contactService.sendMail(this.mail)
             .subscribe(
-            data => this.returnMsg = data,
+            data => {
+                this.returnMsg = data;
+            },
             error => this.error = error);
+        this.clear();
+    }
 
+    isFormValid() {
+        return this.emailAddress && this.name && this.question;
     }
 
     goToTreeServices(link: string) {
@@ -50,7 +56,7 @@ export class HomeComponent implements OnInit {
 
     clear() {
         this.name = "";
-        this.number = "";
+        this.emailAddress = "";
         this.question = "";
     }
 }

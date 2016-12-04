@@ -1,5 +1,5 @@
 ﻿export class Email {
     name: string;
-    email: string;
+    emailAddress: string;
     question: string;
 };
