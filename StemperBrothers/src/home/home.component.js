@@ -31,9 +31,16 @@ var HomeComponent = (function () {
         this.mail.question = this.question;
         this._contactService.sendMail(this.mail)
             .subscribe(function (data) {
-            _this.returnMsg = data;
+            if (data === "Success") {
+                _this.emailMsg = "Your message has been received successfully!";
+                $("#emailStatus").show().delay(3000).fadeOut();
+                _this.clear();
+            }
+            else {
+                _this.emailMsg = "An error occured. Call 405-808-4368 or try again.";
+                $("#emailStatus").show().delay(3000).fadeOut();
+            }
         }, function (error) { return _this.error = error; });
-        this.clear();
     };
     HomeComponent.prototype.isFormValid = function () {
         return this.emailAddress && this.name && this.question;

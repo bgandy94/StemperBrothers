@@ -17,14 +17,16 @@
                         <input [(ngModel)]="name" placeholder="Name" class="form-control" />
                     </div>
                     <div class="form-group" style="float:left; width:49%">
-                        <input [(ngModel)]="emailAddress" placeholder="Email" style="margin-left: 10px;" class="form-control" />
+                        <input name="email" #email="ngModel" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" [(ngModel)]="emailAddress" placeholder="Email" style="margin-left: 10px;" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <textarea [(ngModel)]="question" placeholder="Question/Comment" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <button [disabled]="!isFormValid()" (click)="submitContact()" class="btn btn-primary float-right" type="submit">Submit</button>
+                    <p id="emailStatus">{{emailMsg}}</p>
+                    <div class="contact-form-msg" *ngIf="email.dirty && email.invalid">Please Enter a valid email address</div>
+                    <button [disabled]="!isFormValid() || email.invalid" (click)="submitContact()" class="btn btn-primary float-right" type="submit">Submit</button>
                 </div>
             </div>
             <div class="clearfix"></div>

@@ -1,6 +1,7 @@
 ﻿using StempBros.Models;
 using System;
 using System.Collections.Generic;
+using System.Web.Configuration;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
@@ -18,13 +19,15 @@ namespace StemperBrothers.Controllers.Api
         {
             var context = new ValidationContext(mail, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
+            var fromEmail = new MailAddress(WebConfigurationManager.AppSettings["emailFromUsername"]);
+            var toEmail = new MailAddress(WebConfigurationManager.AppSettings["emailToUsername"]);
             var isValid = Validator.TryValidateObject(mail, context, results);
             if (isValid)
             {
                 MailMessage email = new MailMessage();
                 email.Subject = "Website Contact Form Submission";
-                email.From = new MailAddress("brandongundy@gmail.com");
-                email.To.Add(new MailAddress("brandongundy@gmail.com"));
+                email.From = fromEmail;
+                email.To.Add(toEmail);
                 email.IsBodyHtml = true;
                 email.Body =
                     "Sender Name: " + mail.Name + "<br />" +
@@ -35,7 +38,7 @@ namespace StemperBrothers.Controllers.Api
                 {
                     Host = "smtp.gmail.com",
                     UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential("brandongundy@gmail.com", "##NE#EcqdV8U7C"),
+                    Credentials = new NetworkCredential(fromEmail.ToString(), WebConfigurationManager.AppSettings["emailPassword"]),
                     EnableSsl = true,
                     Port = 587
                 };
@@ -48,7 +51,7 @@ namespace StemperBrothers.Controllers.Api
                     return Ok(new List<ValidationResult> { new ValidationResult("An error occurred. Try again later.") });
                 }
 
-            return Ok(mail);
+            return Ok("Success");
             }
 
             return Ok(results);

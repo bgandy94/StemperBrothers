@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var index_1 = require("../shared/index");
 var GalleryComponent = (function () {
     function GalleryComponent() {
     }
@@ -17,33 +18,15 @@ var GalleryComponent = (function () {
             thumbnail: true
         });
     };
-    Object.defineProperty(GalleryComponent.prototype, "routeAnimation", {
-        get: function () {
-            return true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        core_1.HostBinding("@flyInOut"), 
-        __metadata('design:type', Object)
-    ], GalleryComponent.prototype, "routeAnimation", null);
     GalleryComponent = __decorate([
         core_1.Component({
             selector: "gallery-page",
             templateUrl: "./app/gallery/gallery.component.html",
-            animations: [
-                core_1.trigger('flyInOut', [
-                    core_1.state('in', core_1.style({ transform: 'translateX(0)' })),
-                    core_1.transition('void => *', [
-                        core_1.style({ transform: 'translateX(-100%)' }),
-                        core_1.animate(100)
-                    ]),
-                    core_1.transition('* => void', [
-                        core_1.animate(100, core_1.style({ transform: 'translateX(100%)' }))
-                    ])
-                ])
-            ]
+            animations: [index_1.routeAnimation],
+            host: {
+                '[@routeAnimation]': 'true',
+                '[style.display]': "'block'"
+            }
         }), 
         __metadata('design:paramtypes', [])
     ], GalleryComponent);

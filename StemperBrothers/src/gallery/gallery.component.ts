@@ -1,25 +1,19 @@
 ﻿import { Component, OnInit, HostBinding,
     trigger, transition, animate,
     style, state } from '@angular/core';
+import { routeAnimation } from "../shared/index";
 
 declare var $: any;
-declare var lg: any;
+
 
 @Component({
     selector: "gallery-page",
     templateUrl: "./app/gallery/gallery.component.html",
-    animations: [
-        trigger('flyInOut', [
-            state('in', style({ transform: 'translateX(0)' })),
-            transition('void => *', [
-                style({ transform: 'translateX(-100%)' }),
-                animate(100)
-            ]),
-            transition('* => void', [
-                animate(100, style({ transform: 'translateX(100%)' }))
-            ])
-        ])
-    ]
+    animations: [routeAnimation], 
+    host: {
+        '[@routeAnimation]': 'true',
+        '[style.display]': "'block'"
+    }
 })
 
 export class GalleryComponent implements OnInit {
@@ -27,9 +21,5 @@ export class GalleryComponent implements OnInit {
         $("#gallery").lightGallery({
             thumbnail: true
         }); 
-    }
-
-    @HostBinding("@flyInOut") get routeAnimation() {
-        return true;
     }
 }

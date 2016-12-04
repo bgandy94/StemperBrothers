@@ -14,6 +14,15 @@
     color: #0e7018;
 }
 
+#emailStatus, .contact-form-msg {
+    float: left;
+    font-size: 17px;
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442; /* red */
+}
+
 /*Bootstrap override settings*/
 .navbar-inverse, .btn-primary, footer, .service-item {
     background: #0e7018; /* Old browsers */
@@ -38,8 +47,8 @@ footer {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005206', endColorstr='#0e7018',GradientType=1 ); /* IE6-9 */
 }
 
-.push-right{
-    margin-left:50px;
+.push-right {
+    margin-left: 50px;
 }
 
 .navbar-inverse, .navbar-collapse {
@@ -175,17 +184,40 @@ footer {
 }
 
 @media all and (max-width:1050px) {
+    .service-item-sub {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+@media all and (max-width:975px) {
     .home-page-img {
+        display: none;
         width: 250px;
         height: 250px;
         margin: 0 25px;
     }
-    .home-page-info{
+
+    .home-page-info {
+        width: 100%;
         margin: 10px 0;
+        text-align: center;
+    }
+
+
+
+    #home-page-img {
+        height: 100%;
+        padding: 0 10px;
+        background-size: cover;
+    }
+    
+    footer{
+        margin:0;
     }
 
     .home-page-info-container {
         width: 100%;
-        display:block;
+        display: block;
     }
 }
